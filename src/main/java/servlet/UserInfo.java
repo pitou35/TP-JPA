@@ -11,6 +11,12 @@ import javax.servlet.http.HttpServletResponse;
 
 @WebServlet(name="userinfo",urlPatterns={"/UserInfo"})
 public class UserInfo extends HttpServlet {
+	
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {  
+      resp.sendRedirect("myForm.html");
+        
+    }
 
 	public void doPost(HttpServletRequest request,
 			HttpServletResponse response)
@@ -28,7 +34,7 @@ public class UserInfo extends HttpServlet {
 					" <LI>Prenom: "
 					+ request.getParameter("firstname") + "\n" +
 					" <LI>Age: "
-					+ request.getParameter("age") + "\n" +
+					+ request.getParameter("email") + "\n" +
 					"</UL>\n" +				
 			"</BODY></HTML>");
 	}

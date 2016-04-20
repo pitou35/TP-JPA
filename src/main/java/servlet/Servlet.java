@@ -53,10 +53,10 @@ public class Servlet extends HttpServlet{
 	    out.println("<HTML>\n<BODY>\n <H1>Recapitulatif des informations</H1>\n");
 	    
 	    
-	    out.println("<H1>Personnes</H1>\n");
+	    out.println("Personnes\n");
 	    for (Person p: persons){
-	    	  out.println("<h2>"+p.getNom()+"</h2>\n");
-	    	  out.println("<h3>amis</h3>\n");
+	    	  out.println(""+p.getNom()+"\n");
+	    	  
 	    	  for (Person a: p.getAmis()){
 	    		  out.println("<p>Amis: "+a.getNom()+"</p>\n");
 	    	  }
@@ -77,7 +77,7 @@ public class Servlet extends HttpServlet{
     	jpa.AddPerson(name, new ArrayList<Home>(), new ArrayList<ElectronicDevices>(),  new ArrayList<Person>());
       
     	
-	    resp.sendRedirect("/test-opower");	    
+	    resp.sendRedirect("/opower");	    
     }
 	
 }
