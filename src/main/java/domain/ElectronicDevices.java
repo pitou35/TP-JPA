@@ -7,17 +7,17 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-import domain.smartDevice.SmartDevice;
+
 
 @Entity
 public class ElectronicDevices extends SmartDevice{
  
-	private Person owner;
+	private Person personne;
 
 	
 	public ElectronicDevices(Person p) {
 		super();
-		this.owner =p;
+		this.personne =p;
 	}
 
 	
@@ -27,10 +27,10 @@ public class ElectronicDevices extends SmartDevice{
 	
 	@ManyToOne
 	public Person getPersonne() {
-		return owner;
+		return personne;
 	}
 
-	public void setPersonne(Person owner) {
-		this.owner = owner;
+	public void setPersonne(Person personne) {
+		this.personne = personne;
 	}
 }

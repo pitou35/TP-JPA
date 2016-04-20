@@ -6,47 +6,40 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
+
+import org.codehaus.jackson.annotate.JsonIgnore;
+
+
 
 @Entity
-public class Heater {
-
-	private int id;
-	private int conso;
-	
-	private Home owner;
-	
-	public Heater(int conso){
-		this.conso=conso;
-	}
+@XmlRootElement
+public class Heater extends SmartDevice{
 
 	
-
-	public int getConso() {
-		return conso;
-	}
-
-	public void setConso(int conso) {
-		this.conso = conso;
-	}
 	
-	@Id
-	@GeneratedValue
-	public int getId() {
-		return id;
+	private Home home;
+	
+	public Heater(){}
+	
+	public Heater(Home home) {
+		super();
+		this.home = home;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	
+	
+	
+	@ManyToOne
+	@JsonIgnore
+	@XmlTransient
+	public Home getHome(){
+		return home;
 	}
 	
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="OWNER_ID")
-	public Home getOwner(){
-		return owner;
-	}
-	
-	public void setOwner(Home owner){
-		this.owner=owner;
+	public void setHome(Home home){
+		this.home=home;
 	}
 	
 }

@@ -6,19 +6,19 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 
-public class smartDevice {
+@Entity
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+public class SmartDevice {
 	
-	@Entity
-	@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-	public class SmartDevice {
+	
 
-		private Long id; 
+		private int id; 
 		
 		private String nom; 
 		
 		private int conso; 
 
-		public SmartDevice(Long id, String nom, int conso) {
+		public SmartDevice(int id, String nom, int conso) {
 			super();
 			this.id = id;
 			this.nom = nom;
@@ -33,11 +33,11 @@ public class smartDevice {
 		
 		@Id
 	    @GeneratedValue
-		public Long getId() {
+		public int getId() {
 			return id;
 		}
 
-		public void setId(Long id) {
+		public void setId(int id) {
 			this.id = id;
 		}
 
@@ -56,6 +56,6 @@ public class smartDevice {
 		public void setConso(int conso) {
 			conso = conso;
 		}
-	}
+	
 
 }

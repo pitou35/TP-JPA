@@ -21,23 +21,31 @@ public class Home {
 	
 	private int nbPieces;
 	
-	private Person owner;
+	private Person personne;
 	
 	private String address;
 	
-	private List<Heater> chauffages=new ArrayList<Heater>();
+	private List<Heater> heaters=new ArrayList<Heater>();
 	
 	public Home(){
 		super();
 	}
 	
-	public Home(int id, int taille, int nbPieces, String address, List<Heater> chauffages){
+	public Home(int id, int taille, int nbPieces, String address, List<Heater> heaters){
 		super();
 		this.taille=taille;
 		this.nbPieces=nbPieces;
 		this.id=id;
 		this.address=address;
-		this.chauffages=chauffages;
+		this.heaters=heaters;
+	}
+	
+	public String getAdresse() {
+		return address;
+	}
+
+	public void setAdresse(String address) {
+		this.address = address;
 	}
 
 	
@@ -70,22 +78,23 @@ public class Home {
 	}
 	
 	@ManyToOne
-	public Person getOwner(){
-		return owner;
+	public Person getPersonne(){
+		return personne;
 	}
 	
-	public void setOwner(Person owner){
-		this.owner=owner;
+	public void setPersonne(Person personne){
+		this.personne=personne;
 	}
 	
 	@OneToMany(mappedBy = "home", cascade = CascadeType.PERSIST)
-    public List<Heater> getChauffages(){
-    	return chauffages;
-    }
-    
-    public void setChauffages(List<Heater> chauffages){
-    	this.chauffages=chauffages;
-    }
+	public List<Heater> getHeaters() {
+		return heaters;
+	}
+
+	public void setHeaters(List<Heater> heaters) {
+		this.heaters = heaters;
+	}
+	
     
     /*
     

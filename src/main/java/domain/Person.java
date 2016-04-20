@@ -30,7 +30,7 @@ public class Person {
 	
 	private String email;
 	
-	private List<ElectronicDevices> Elect=new ArrayList<ElectronicDevices>();
+	private List<ElectronicDevices> devices=new ArrayList<ElectronicDevices>();
 	
 	private List<Home> maisons=new ArrayList<Home>();
 	
@@ -40,12 +40,12 @@ public class Person {
 		super();
 	}
 	
-	public Person(int id, String nom, String prenom, String email, List<Home> maisons, List<ElectronicDevices> Elect, List<Person> amis) {
+	public Person(int id, String nom, String prenom, String email, List<Home> maisons, List<ElectronicDevices> devices, List<Person> amis) {
 		super();
 		this.id = id;
 		this.nom = nom;
 		this.maisons = maisons;
-		this.Elect = Elect;
+		this.devices = devices;
 		this.amis = amis;
 	}
 
@@ -80,10 +80,12 @@ public class Person {
 	}
 	
     public void setId(int id) {
-		id = id;
+		this.id = id;
 	}
 	
-    @OneToMany(mappedBy="owner", cascade=CascadeType.PERSIST)
+    @OneToMany(mappedBy="personne", cascade=CascadeType.PERSIST)
+    @JsonIgnore
+	@XmlTransient
     public List<Home> getMaisons(){
     	return maisons;
     }
@@ -103,13 +105,15 @@ public class Person {
     }
     */
     
-    @OneToMany(mappedBy = "owner", cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "personne", cascade = CascadeType.PERSIST)
+	@JsonIgnore
+	@XmlTransient
     public List<ElectronicDevices> getElect() {
-		return Elect;
+		return devices;
 	}
 
-	public void setElect(List<ElectronicDevices> elect) {
-		Elect = elect;
+	public void setElect(List<ElectronicDevices> devices) {
+		devices = devices;
 	}
 
 	/*
@@ -133,7 +137,8 @@ public class Person {
 	@JoinTable(name = "amis", joinColumns = { @JoinColumn(name = "friend", referencedColumnName = "id", nullable = false)}, inverseJoinColumns = {
 	@JoinColumn(name = "friendof", referencedColumnName = "id", nullable = false)})
 	@ManyToMany
-
+	@JsonIgnore
+	@XmlTransient
 	public List<Person> getAmis() {
 		return amis;
 	}
