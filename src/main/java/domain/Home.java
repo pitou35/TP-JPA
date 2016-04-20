@@ -23,11 +23,21 @@ public class Home {
 	
 	private Person owner;
 	
+	private String address;
+	
 	private List<Heater> chauffages=new ArrayList<Heater>();
 	
-	public Home(int taille, int nbPieces){
+	public Home(){
+		super();
+	}
+	
+	public Home(int id, int taille, int nbPieces, String address, List<Heater> chauffages){
+		super();
 		this.taille=taille;
 		this.nbPieces=nbPieces;
+		this.id=id;
+		this.address=address;
+		this.chauffages=chauffages;
 	}
 
 	
@@ -59,8 +69,7 @@ public class Home {
 		this.id = id;
 	}
 	
-	@ManyToOne(fetch=FetchType.LAZY, cascade=CascadeType.PERSIST)
-	@JoinColumn(name="OWNER_ID")
+	@ManyToOne
 	public Person getOwner(){
 		return owner;
 	}
@@ -69,7 +78,7 @@ public class Home {
 		this.owner=owner;
 	}
 	
-	@OneToMany(mappedBy="owner")
+	@OneToMany(mappedBy = "home", cascade = CascadeType.PERSIST)
     public List<Heater> getChauffages(){
     	return chauffages;
     }
@@ -78,8 +87,11 @@ public class Home {
     	this.chauffages=chauffages;
     }
     
+    /*
+    
     public void addChauffages(Heater heater){
     	chauffages.add(heater);
     }
+    */
 	
 }
