@@ -14,6 +14,7 @@ import javax.persistence.criteria.Root;
 
 
 import domain.ElectronicDevices;
+import domain.Heater;
 import domain.Home;
 import domain.Person;
 
@@ -34,7 +35,7 @@ public class Opower{
 	        return em;
 	    }
 	    
-	    //permet de lister les individus, même code pour toutes les autres entités (home...)
+	    
 	    public List<Person> ListOfPersonne(){
 			CriteriaBuilder criteriaBuilder = Opower.getEntityManager().getCriteriaBuilder(); 
 			CriteriaQuery<Person> query = criteriaBuilder.createQuery(Person.class);
@@ -45,7 +46,7 @@ public class Opower{
 			return (List<Person>)request.getResultList();
 		}
 	    
-	    //permet d'ajouter une personne, même code pour les autres entités
+	   
 	    public void AddPerson(String nom,ArrayList<Home> homes,ArrayList<ElectronicDevices> devices,ArrayList<Person> amis){
 	    	Opower.getEntityManager().getTransaction().begin();
 			Person p= new Person();
@@ -55,5 +56,34 @@ public class Opower{
 			p.setMaisons(homes);	
 			Opower.getEntityManager().persist(p);
 			Opower.getEntityManager().getTransaction().commit();
+		}
+	    
+	    public List<Heater> ListOfHeaters(){
+			CriteriaBuilder criteriaBuilder = Opower.getEntityManager().getCriteriaBuilder(); 
+			CriteriaQuery<Heater> query = criteriaBuilder.createQuery(Heater.class);
+			Root<Heater> heater = query.from(Heater.class); 
+			query.select(heater);
+			TypedQuery<Heater> req = Opower.getEntityManager().createQuery(query); 
+			return (List<Heater>)req.getResultList();
+		}
+		
+		
+		public List<ElectronicDevices> ListOfDevice(){
+			CriteriaBuilder criteriaBuilder = Opower.getEntityManager().getCriteriaBuilder(); 
+			CriteriaQuery<ElectronicDevices> query = criteriaBuilder.createQuery(ElectronicDevices.class);
+			Root<ElectronicDevices> ed = query.from(ElectronicDevices.class); 
+			query.select(ed); 
+			TypedQuery<ElectronicDevices> req = Opower.getEntityManager().createQuery(query); 
+			return (List<ElectronicDevices>)req.getResultList();
+		}
+		
+		
+		public List<Home> ListOfHome(){
+			CriteriaBuilder criteriaBuilder = Opower.getEntityManager().getCriteriaBuilder(); 
+			CriteriaQuery<Home> query = criteriaBuilder.createQuery(Home.class); 
+			Root<Home> home = query.from(Home.class); 
+			query.select(home); 
+			TypedQuery<Home> req = Opower.getEntityManager().createQuery(query); 
+			return (List<Home>)req.getResultList(); 
 		}
 }

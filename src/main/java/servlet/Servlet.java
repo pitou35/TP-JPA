@@ -42,7 +42,10 @@ public class Servlet extends HttpServlet{
             throws ServletException, IOException {
     	
     	
+		List<Heater> heaters =jpa.ListOfHeaters();
+    	List<Home> homes =jpa.ListOfHome();
     	List<Person> persons =jpa.ListOfPersonne();
+    	List<ElectronicDevices> elecDevices =jpa.ListOfDevice();
     	
     	
     	resp.setContentType("text/html");
@@ -62,6 +65,27 @@ public class Servlet extends HttpServlet{
 	    	  }
 	    	  out.println("<p>----------</p>\n");
 	    	  
+	    }
+	    out.println("<H1>Chauffage</H1>\n");
+	    for (Heater h: heaters){
+	    	  out.println(h.getNom()+"\n");
+	    	  out.println("<p>"+h.getConso()+"</p>\n");
+	    	  out.println("<p>"+h.getHome().getId()+"</p>\n");
+	    	  out.println("<p>----------------------------</p>\n");
+	    }
+	    out.println("<H1>Maison</H1>\n");
+	    for (Home h: homes){
+	    	  out.println("Id: "+h.getId()+"\n");
+	    	  out.println("<p>"+h.getAdresse()+"</p>\n");
+	    	  out.println("<p>"+h.getPersonne().getNom()+"</p>\n");
+	    	  out.println("<p>----------------------------</p>\n");
+	    }
+	    out.println("<H1>ElectronicDevices</H1>\n");
+	    for (ElectronicDevices elec: elecDevices){
+	    	  out.println(elec.getNom()+"\n");
+	    	  out.println("<p>"+elec.getConso()+"</p>\n");
+	    	  out.println("<p>"+elec.getPersonne().getNom()+"</p>\n");
+	    	  out.println("<p>----------------------------</p>\n");
 	    }
 	    
 	    out.println("</BODY></HTML>");
