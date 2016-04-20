@@ -7,12 +7,16 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.xml.bind.annotation.XmlRootElement;
 
+@NamedQuery(name="Person.findAll", query="Select p from Person p")
 @Entity
+@XmlRootElement
 public class Person {
 	
-	private int Id;
+	private int id;
 
 	private String nom;
 	
@@ -24,11 +28,19 @@ public class Person {
 	
 	private List<Home> maisons=new ArrayList<Home>();
 	
-	public Person(String nom, String prenom, String email){
-		this.nom=nom;
-		this.prenom=prenom;
-		this.email=email;
-		
+	private List<Person> amis;
+	
+	public Person() {
+		super();
+	}
+	
+	public Person(int id, String nom, String prenom, String email, List<Home> maisons, List<ElectronicDevices> Elect, List<Person> amis) {
+		super();
+		this.id = id;
+		this.nom = nom;
+		this.maisons = maisons;
+		this.Elect = Elect;
+		this.amis = amis;
 	}
 
     public String getNom() {
@@ -58,11 +70,11 @@ public class Person {
 	@Id
     @GeneratedValue
     public int getId() {
-		return Id;
+		return id;
 	}
 	
     public void setId(int id) {
-		Id = id;
+		id = id;
 	}
 	
     @OneToMany(mappedBy="owner", cascade=CascadeType.PERSIST)

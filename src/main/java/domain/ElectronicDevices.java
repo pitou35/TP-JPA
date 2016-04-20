@@ -7,45 +7,30 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import domain.smartDevice.SmartDevice;
+
 @Entity
-public class ElectronicDevices {
+public class ElectronicDevices extends SmartDevice{
  
-	private int id;
-	private int Conso;
 	private Person owner;
+
 	
-	public ElectronicDevices(int conso){
-		this.Conso=conso;
-		
+	public ElectronicDevices(Person p) {
+		super();
+		this.owner =p;
 	}
 
 	
-
-	public int getConso() {
-		return Conso;
-	}
-
-	public void setConso(int conso) {
-		Conso = conso;
+	public ElectronicDevices() {
+		super();
 	}
 	
-	@Id
-	@GeneratedValue
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-	
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="OWNER_ID")
-	public Person getOwner(){
+	@ManyToOne
+	public Person getPersonne() {
 		return owner;
 	}
-	
-	public void setOwner(Person owner){
-		this.owner=owner;
+
+	public void setPersonne(Person owner) {
+		this.owner = owner;
 	}
 }
