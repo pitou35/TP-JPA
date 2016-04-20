@@ -7,9 +7,15 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
+
+import org.codehaus.jackson.annotate.JsonIgnore;
 
 @NamedQuery(name="Person.findAll", query="Select p from Person p")
 @Entity
@@ -86,6 +92,7 @@ public class Person {
     	this.maisons=maisons;
     }
     
+    /*
     public void addMaisons(Home maison){
     	maisons.add(maison);
     	maison.setOwner(this);
@@ -94,8 +101,9 @@ public class Person {
     public void removeMaisons(Home maison){
     	maisons.remove(maison);
     }
+    */
     
-    @OneToMany(mappedBy="owner")
+    @OneToMany(mappedBy = "owner", cascade = CascadeType.PERSIST)
     public List<ElectronicDevices> getElect() {
 		return Elect;
 	}
@@ -104,6 +112,7 @@ public class Person {
 		Elect = elect;
 	}
 
+	/*
 	public void addElec(ElectronicDevices elec){
     	Elect.add(elec);
     }
@@ -112,9 +121,25 @@ public class Person {
     	Elect.remove(elec);
     }
 	
+	*/
+	
+	/*
 	@Override
 	public String toString() {
 		return "personne [id=" + Id + ", name=" + nom + ", prenom="+ prenom + ", email="+email+"]";
+	}
+	*/
+	
+	@JoinTable(name = "amis", joinColumns = { @JoinColumn(name = "friend", referencedColumnName = "id", nullable = false)}, inverseJoinColumns = {
+	@JoinColumn(name = "friendof", referencedColumnName = "id", nullable = false)})
+	@ManyToMany
+
+	public List<Person> getAmis() {
+		return amis;
+	}
+	
+	public void setAmis(List<Person> amis) {
+		this.amis = amis;
 	}
 	
 	
