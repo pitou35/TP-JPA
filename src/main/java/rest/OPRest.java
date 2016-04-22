@@ -89,7 +89,7 @@ public class OPRest {
     	
     	try {
 			JSONObject obj = new JSONObject(json); 
-			String nom= obj.getString("name"); 
+			String nom= obj.getString("nom"); 
 			String prenom= obj.getString("prenom"); 
 			String email= obj.getString("email"); 
 			
