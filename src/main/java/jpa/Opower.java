@@ -47,10 +47,12 @@ public class Opower{
 		}
 	    
 	   
-	    public void AddPerson(String nom,ArrayList<Home> homes,ArrayList<ElectronicDevices> devices,ArrayList<Person> amis){
+	    public void AddPerson(String nom, String prenom, String email, ArrayList<Home> homes,ArrayList<ElectronicDevices> devices,ArrayList<Person> amis){
 	    	Opower.getEntityManager().getTransaction().begin();
 			Person p= new Person();
 			p.setNom(nom);
+			p.setPrenom(prenom);
+			p.setEmail(email);
 			p.setElect(devices);
 			p.setAmis(amis);
 			p.setMaisons(homes);	

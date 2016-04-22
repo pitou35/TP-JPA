@@ -24,7 +24,7 @@ import domain.Home;
 import domain.Person;
 import jpa.Opower;
 
-@Path("/test-opower")
+@Path("/rest-opower")
 public class OPRest {
 	
 	private Opower jpa= new Opower();
@@ -71,10 +71,10 @@ public class OPRest {
 	@POST
     @Path("/person")
     @Produces(MediaType.TEXT_HTML)
-    public Response addPerson(@FormParam("name") String name ) throws URISyntaxException {
+    public Response addPerson(@FormParam("nom") String name,  @FormParam("prenom") String prenom, @FormParam("email") String email) throws URISyntaxException {
     	
-    	jpa.AddPerson(name, new ArrayList<Home>(), new ArrayList<ElectronicDevices>(),  new ArrayList<Person>());
-    	URI targetURIForRedirection = new URI("/opower/data");
+    	jpa.AddPerson(name, prenom, email, new ArrayList<Home>(), new ArrayList<ElectronicDevices>(),  new ArrayList<Person>());
+    	URI targetURIForRedirection = new URI("/rest-opower/data");
     	
     	return Response.seeOther(targetURIForRedirection).build();	
 	    
@@ -89,14 +89,16 @@ public class OPRest {
     	
     	try {
 			JSONObject obj = new JSONObject(json); 
-			String name= obj.getString("name"); 
+			String nom= obj.getString("name"); 
+			String prenom= obj.getString("prenom"); 
+			String email= obj.getString("email"); 
 			
-	    	jpa.AddPerson(name, new ArrayList<Home>(), new ArrayList<ElectronicDevices>(),  new ArrayList<Person>());
+	    	jpa.AddPerson(nom, prenom, email, new ArrayList<Home>(), new ArrayList<ElectronicDevices>(),  new ArrayList<Person>());
 		} catch (JSONException e) {
 		
 			e.printStackTrace();
 		}
-    	URI targetURIForRedirection = new URI("/opower/data");
+    	URI targetURIForRedirection = new URI("/rest-opower/data");
     	return Response.seeOther(targetURIForRedirection).build();	
 	    
 	  

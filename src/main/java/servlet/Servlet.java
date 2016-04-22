@@ -96,9 +96,11 @@ public class Servlet extends HttpServlet{
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
     	
-    	String name = req.getParameter("name"); 
+    	String nom = req.getParameter("nom");
+    	String prenom = req.getParameter("prenom");
+    	String email = req.getParameter("email");
     	
-    	jpa.AddPerson(name, new ArrayList<Home>(), new ArrayList<ElectronicDevices>(),  new ArrayList<Person>());
+    	jpa.AddPerson(nom, prenom, email, new ArrayList<Home>(), new ArrayList<ElectronicDevices>(),  new ArrayList<Person>());
       
     	
 	    resp.sendRedirect("/opower");	    
