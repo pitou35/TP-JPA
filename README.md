@@ -12,7 +12,9 @@ http://localhost:8080/addPerson.html
 
 
 REST:
+
 - liste JSON des personnes:
+
 http://localhost:8080/rest/rest-opower/dataPerson
 
 - ajout d'une personne, POST JSON:
